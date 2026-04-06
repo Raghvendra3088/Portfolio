@@ -6,6 +6,27 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
+const projects = [
+  {
+    title: "Electricity Predictor",
+    category: "Machine Learning",
+    tools: "Python, Pandas, Scikit-Learn, Streamlit",
+    image: "/images/electricity-predictor.png",
+    liveLink: "https://lnkd.in/gWkaarQ6",
+    githubLink: "https://lnkd.in/gRG6K5SU",
+    streamlitLink: "https://electricity-demand-predictor-rt.streamlit.app/"
+  },
+  {
+    title: "Project Name",
+    category: "Category",
+    tools: "Javascript, TypeScript, React, Threejs",
+    image: "/images/placeholder.webp",
+    liveLink: "",
+    githubLink: "",
+    streamlitLink: ""
+  }
+];
+
 const Work = () => {
   useGSAP(() => {
   let translateX: number = 0;
@@ -53,21 +74,29 @@ const Work = () => {
           My <span>Work</span>
         </h2>
         <div className="work-flex">
-          {[...Array(6)].map((_value, index) => (
+          {projects.map((project, index) => (
             <div className="work-box" key={index}>
               <div className="work-info">
                 <div className="work-title">
                   <h3>0{index + 1}</h3>
 
                   <div>
-                    <h4>Project Name</h4>
-                    <p>Category</p>
+                    <h4>{project.title}</h4>
+                    <p>{project.category}</p>
                   </div>
                 </div>
                 <h4>Tools and features</h4>
-                <p>Javascript, TypeScript, React, Threejs</p>
+                <p>{project.tools}</p>
+                {project.githubLink && (
+                  <div style={{ marginTop: '10px', display: 'flex', gap: '15px' }}>
+                    <a href={project.githubLink} target="_blank" rel="noreferrer" style={{ color: '#adacac', textDecoration: 'underline', fontWeight: 400, fontSize: '15px' }}>GitHub Repo</a>
+                    {project.streamlitLink && (
+                      <a href={project.streamlitLink} target="_blank" rel="noreferrer" style={{ color: '#adacac', textDecoration: 'underline', fontWeight: 400, fontSize: '15px' }}>Streamlit App</a>
+                    )}
+                  </div>
+                )}
               </div>
-              <WorkImage image="/images/placeholder.webp" alt="" />
+              <WorkImage image={project.image} alt="" link={project.liveLink || undefined} />
             </div>
           ))}
         </div>
